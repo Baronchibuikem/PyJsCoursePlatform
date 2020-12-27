@@ -19,6 +19,7 @@ class UserSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
     confirm_password = serializers.CharField(write_only=True)
     username = serializers.CharField()
+    user_type = serializers.CharField()
 
     def validate(self, data):
         if not data.get('password') or not data.get('confirm_password'):
@@ -48,38 +49,22 @@ class UserSerializer(serializers.Serializer):
                 "error": 'A user with that username already exists'})
         return payload
 
-
-class StudentSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=True)
-
-    class Meta:
-        model = Student
-        fields = "__all__"
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['user'] = UserSerializer(instance.user).data
-        return response
-
-    @transaction.atomic
     def create(self, validated_data):
         """
         used for registering a user into the database
         """
-        user_data = validated_data.pop('user')
-        print(validated_data["age"], 'user data--------------------------')
+        # user_data = validated_data.pop('user')
+        # print(validated_data["age"], 'user data--------------------------')
         # user = UserSerializer.create(UserSerializer(), validated_data=user_data)
-        user = CustomUser(first_name=user_data["first_name"],
-                          last_name=user_data['last_name'],
-                          email=user_data["email"],
-                          username=user_data['username'],
-                          password=user_data["password"])
+        user = CustomUser(first_name=validated_data["first_name"],
+                          last_name=validated_data['last_name'],
+                          email=validated_data["email"],
+                          username=validated_data['username'],
+                          password=validated_data["password"],
+                          user_type=validated_data['user_type'])
         user.set_password(user.password)
-        user.is_student = True
         user.save()
-        student = Student.objects.create(user=user, age=validated_data['age'],
-                                         location=validated_data['location'])
-        return student
+        return user
 
 
 class LoginSerializer(serializers.Serializer):
@@ -91,52 +76,16 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
-class InstructorSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=True)
+class GetUserSerializer(serializers.ModelSerializer):
+    """
+    For serializing specific fields from the database
+    """
+    # image_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = Instructor
-        fields = "__all__"
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['user'] = UserSerializer(instance.user).data
-        return response
-
-    @transaction.atomic
-    def create(self, validated_data):
-        """
-        used for registering a user into the database
-        """
-        user_data = validated_data.pop('user')
-        print(validated_data["currently_work_at"],
-              'user data--------------------------')
-        # user = UserSerializer.create(UserSerializer(), validated_data=user_data)
-        user = CustomUser(first_name=user_data["first_name"],
-                          last_name=user_data['last_name'],
-                          email=user_data["email"],
-                          username=user_data['username'],
-                          password=user_data["password"])
-        user.set_password(user.password)
-        user.is_instructor = True
-        user.save()
-        instructor = Instructor.objects.create(user=user, primary_language=validated_data['primary_language'],
-                                               other_languages=validated_data[
-                                                   'other_languages'], years_of_experience=validated_data['years_of_experience'],
-                                               currently_work_at=validated_data['currently_work_at'])
-        return instructor
-
-
-# class GetUserSerializer(serializers.ModelSerializer):
-#     """
-#     For serializing specific fields from the database
-#     """
-#     # image_url = serializers.SerializerMethodField()
-
-#     class Meta:
-#         model = CustomUser
-#         fields = ("id", "first_name", "username", "last_name",
-#                   "email", "is_active")
+        model = CustomUser
+        fields = ("id", "first_name", "username", "last_name",
+                  "email", "is_active", "user_type")
 
 # #     def get_image_url(self, instance):
 # #         try:

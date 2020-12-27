@@ -7471,3 +7471,355 @@ Traceback (most recent call last):
   File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
     raise RuntimeError(
 RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8003/api/v1/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 61, in post
+    serializer.save()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/serializers.py", line 56, in create
+    user_data = validated_data.pop('user')
+KeyError: 'user'
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 61, in post
+    serializer.save()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/serializers.py", line 59, in create
+    user = CustomUser(first_name=user_data["first_name"],
+NameError: name 'user_data' is not defined
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 63, in post
+    user_email = serializer.data["user"]["email"]
+KeyError: 'user'
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 63, in post
+    print(serializer.data["user"])
+KeyError: 'user'
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 64, in post
+    user_email = serializer.data["user"]["email"]
+KeyError: 'user'
+Internal Server Error: /api/v1/register/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 64, in post
+    user_email = serializer.data["user"]["email"]
+KeyError: 'user'
+Internal Server Error: /api/v1/login/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 37, in post
+    print(serializer.data['email'])
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 562, in data
+    ret = super().data
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 256, in data
+    raise AssertionError(msg)
+AssertionError: When a serializer is passed a `data` keyword argument you must call `.is_valid()` before attempting to access the serialized `.data` representation.
+You should either call `.is_valid()` first, or access `.initial_data` instead.
+Internal Server Error: /api/v1/login/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/http/response.py", line 51, in __init__
+    self.status_code = int(status)
+TypeError: int() argument must be a string, a bytes-like object or a number, not 'CustomUser'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/server/account/views.py", line 45, in post
+    return Response(status.HTTP_200_OK, user_obj)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/response.py", line 30, in __init__
+    super().__init__(None, status=status)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/template/response.py", line 36, in __init__
+    super().__init__('', content_type, status, charset=charset)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/http/response.py", line 290, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/http/response.py", line 53, in __init__
+    raise TypeError('HTTP status code must be an integer.')
+TypeError: HTTP status code must be an integer.
+Internal Server Error: /api/v1/login/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 143, in _get_response
+    response = response.render()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/renderers.py", line 100, in render
+    ret = json.dumps(
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type CustomUser is not JSON serializable
+Internal Server Error: /api/v1/login/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 143, in _get_response
+    response = response.render()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/renderers.py", line 100, in render
+    ret = json.dumps(
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type CustomUser is not JSON serializable
+Internal Server Error: /api/v1/login/
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 143, in _get_response
+    response = response.render()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/renderers.py", line 100, in render
+    ret = json.dumps(
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type GetUserSerializer is not JSON serializable
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/views.py", line 94, in get
+    schema = generator.get_schema(request, self.public)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/generators.py", line 254, in get_schema
+    paths, prefix = self.get_paths(endpoints, components, request, public)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/generators.py", line 412, in get_paths
+    operation = self.get_operation(view, path, prefix, method, components, request)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/generators.py", line 454, in get_operation
+    operation = view_inspector.get_operation(operation_keys)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/view.py", line 32, in get_operation
+    body = self.get_request_body_parameters(consumes)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/view.py", line 85, in get_request_body_parameters
+    schema = self.get_request_body_schema(serializer)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/view.py", line 142, in get_request_body_schema
+    return self.serializer_to_schema(serializer)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/base.py", line 445, in serializer_to_schema
+    return self.probe_inspectors(
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/base.py", line 118, in probe_inspectors
+    result = method(obj, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/field.py", line 42, in get_schema
+    return self.probe_field_inspectors(serializer, openapi.Schema, self.use_definitions)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/base.py", line 236, in probe_field_inspectors
+    return self.probe_inspectors(
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/base.py", line 118, in probe_inspectors
+    result = method(obj, **kwargs)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/field.py", line 135, in field_to_swagger_object
+    actual_schema = definitions.setdefault(ref_name, make_schema_definition)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/openapi.py", line 690, in setdefault
+    ret = maker()
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/drf_yasg/inspectors/field.py", line 102, in make_schema_definition
+    for property_name, child in serializer.fields.items():
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 1038, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "/home/baron/Documents/projects/personalprojects/pyjs/env/lib/python3.8/site-packages/rest_framework/serializers.py", line 1134, in get_field_names
+    assert field_name in fields, (
+AssertionError: The field 'password' was declared on serializer LoginSerializer, but has not been included in the 'fields' option.

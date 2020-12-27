@@ -1,4 +1,7 @@
 import {user_register, user_login} from "../server_side_api_calls/authentication_api_calls"
+import router from "../../router"
+
+
 
 const state = {
     status : false,
@@ -10,7 +13,9 @@ const state = {
 const getters = {
     get_current_user : (state) => state.user,
     get_server_error: (state) => state.server_error,
-    get_is_user_authenticated: (state) => state.is_authenticated
+    get_is_user_authenticated: (state) => state.is_authenticated,
+    get_current_status: state => state.status
+    
 };
 
 const actions = {
@@ -18,11 +23,16 @@ const actions = {
         commit("POST_REQUEST");
         try {
             const response = await user_login(payload)
-            console.log(response, "api call")
-            commit("LOGIN_SUCCESSFUL", response)
+            const token = response.data.token
+            localStorage.setItem("token", token);
             commit("POST_RESPONSE")   
+            commit("LOGIN_SUCCESSFUL", response.data)
+            commit("CLEAR_SERVER_ERROR")
+            router.push("/dashboard")
         } catch (error) {
-            commit("SERVER_ERROR", error.response.data)
+            console.log(error.response.data.message, "Error")
+            commit("SERVER_ERROR", error.response.data.message)
+
             commit("POST_RESPONSE")
         }
         
@@ -52,14 +62,19 @@ const mutations = {
     SERVER_ERROR(state, payload){
         state.server_error = payload;
     },
+    CLEAR_SERVER_ERROR(state){
+        state.server_error = {}
+    },
     REGISTRATION_SUCCESSFUL(state, payload){
         state.user = payload
         state.is_authenticated = true
+        state.status = false
     },
     LOGIN_SUCCESSFUL(state, payload){
-        state.user = payload
+        const { token, user } = payload;
+        state.token = token;
+		state.user = { ...user };
         state.is_authenticated = true
-        state.token = localStorage.setItem(payload.token)
     }
 
 

@@ -1,59 +1,92 @@
-import cloudinary
-from cloudinary.models import CloudinaryField
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import AbstractUser, Group
+from django.contrib.auth.hashers import make_password
+from cloudinary.models import CloudinaryField
+import cloudinary
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 
 
+# Here we are extending django user model
 class CustomUser(AbstractUser):
+
+    class Types(models.TextChoices):
+        """
+        Setting the types of user's we will have
+        """
+        Student = "Student", "Student"
+        Instructor = "Instructor", "Instructor"
+    user_type = models.CharField(_("Type"),
+                                 max_length=50, choices=Types.choices, default=Types.Student)
     username = models.CharField(
         null=True, blank=True, max_length=50, unique=True)
     email = models.EmailField(unique=True)
-    is_student = models.BooleanField(default=False)
-    is_instructor = models.BooleanField(default=False)
+    # bio = models.CharField(max_length=250, null=True, blank=True)
+    # image = CloudinaryField("user_image", null=True, blank=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", ]
+    REQUIRED_FIELDS = ['user_type', 'username']
 
     def __str__(self):
         return f'{self.username}'
 
-    # def save(self, *args, **kwargs):
-    #     if self.is_staff:
-    #         self.password = make_password(self.password, hasher='default')
-    #     elif not self.is_staff:
-    #         self.password = make_password(self.password, hasher='default')
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.is_staff:
+            self.password = self.password
+        elif not self.is_staff:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
 
 
-class Student(models.Model):
+class StudentManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(user_type=CustomUser.Types.Student)
+
+
+class StudentProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    age = models.IntegerField()
-    location = models.CharField(max_length=50)
+
+
+# Student abstract model
+class Student(CustomUser):
+    base_type = CustomUser.Types.Student
+    objects = StudentManager()
 
     class Meta:
-        verbose_name = _('Student')
-        verbose_name_plural = _('students')
+        proxy = True
 
-    def __str__(self):
-        return self.user.email
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.user_type = CustomUser.Types.Student
+        return super().save(*args, **kwargs)
+
+    @ property
+    def studentprofile(self):
+        return self.studentprofile
 
 
-class Instructor(models.Model):
-    user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, related_name="instructor")
-    #phone = models.PhoneNumberField()
-    primary_language = models.CharField(max_length=25)
-    other_languages = models.CharField(max_length=250)
-    years_of_experience = models.IntegerField()
-    currently_work_at = models.CharField(max_length=25)
-    date_registered = models.DateField(default=timezone.now)
+class InstructorManager(models.Manager):
+    """[summary]
+    Custom model manager for querying Instructor objects
+    """
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(user_type=CustomUser.Types.Instructor)
+
+
+class Instructor(CustomUser):
+    """
+    Models for Instructor
+    """
+    base_type = CustomUser.Types.Instructor
+    objects = InstructorManager()
 
     class Meta:
-        verbose_name = _('Instructor')
-        verbose_name_plural = _('instructors')
+        proxy = True
 
-    def __str__(self):
-        return f'{self.user.first_name}{self.user.last_name}'
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.user_type = CustomUser.Types.Instructor
+        return super().save(*args, **kwargs)

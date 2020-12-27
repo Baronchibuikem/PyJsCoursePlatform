@@ -7,7 +7,7 @@ from knox.models import AuthToken
 from rest_framework import status, generics, permissions
 # from account.permissions import IsOwnerOrReadonly
 from account.serializers import (
-    StudentSerializer, LoginSerializer, UserSerializer, InstructorSerializer)
+    LoginSerializer, UserSerializer, GetUserSerializer)
 from utils.sendEmail import Email
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
@@ -36,12 +36,18 @@ class LoginViewSet(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
+            print(serializer.data['email'])
             user_obj = authenticate(
                 request, email=serializer.data["email"], password=serializer.data["password"])
+            print(user_obj)
             if user_obj != None:
                 if user_obj.is_active:
                     login(request, user_obj)
-                    return Response(status.HTTP_200_OK)
+                    user = CustomUser.objects.get(username=user_obj)
+                    return Response({
+                        "user": GetUserSerializer(user, context=self.get_serializer_context()).data,
+                        "token": AuthToken.objects.create(user)[1], },
+                        status.HTTP_200_OK)
                 if not user_obj.is_active:
                     return Response(self._error_response('pending_confirmation'), status.HTTP_400_BAD_REQUEST)
             else:
@@ -53,7 +59,7 @@ class StudentRegisterViewSet(generics.GenericAPIView):
     """
     For registering a user into the database as a student
     """
-    serializer_class = StudentSerializer
+    serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
@@ -61,10 +67,11 @@ class StudentRegisterViewSet(generics.GenericAPIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             # get the user email
-            user_email = serializer.data["user"]["email"]
+            print(serializer.data['email'])
+            user_email = serializer.data["email"]
             # use the email to get the user object from CustomUser model in the database
             get_current_user_email = CustomUser.objects.get(email=user_email)
-            user_obj = serializer.data["user"]
+            user_obj = serializer.data
             # Send a signal to change the user is_active to false
             deactivate_user_status.send(sender=CustomUser, user=user_obj)
             # generate a token for the user
@@ -90,45 +97,45 @@ class StudentRegisterViewSet(generics.GenericAPIView):
             }, status.HTTP_201_CREATED,)
 
 
-class InstructorRegisterViewSet(generics.GenericAPIView):
-    """
-    For registering a user into the database as an Instructor
-    """
-    serializer_class = InstructorSerializer
-    permission_classes = (permissions.AllowAny,)
+# class InstructorRegisterViewSet(generics.GenericAPIView):
+#     """
+#     For registering a user into the database as an Instructor
+#     """
+#     serializer_class = InstructorSerializer
+#     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            # get the user email
-            user_email = serializer.data["user"]["email"]
-            # use the email to get the user object from CustomUser model in the database
-            get_current_user_email = CustomUser.objects.get(email=user_email)
-            user_obj = serializer.data["user"]
-            # Send a signal to change the user is_active to false
-            deactivate_user_status.send(sender=CustomUser, user=user_obj)
-            # generate a token for the user
-            token = AuthToken.objects.create(get_current_user_email)[1]
-            # get the current site and domain name
-            current_site = get_current_site(request).domain
-            # Here we are calling the endpoint to email-verify and passing in the user id and token dynamically
-            relative_link = reverse(
-                "account:email-verify", args=[user_obj["id"], token])
-            # Here we pass in the current_site and the relative_link with it's added arguments
-            absolute_url = f"http://{current_site}{relative_link}"
-            email_body = f'Hi {user_obj["last_name"]} {user_obj["first_name"]}, please use the link below to verify your email \n {absolute_url}'
-            data = {"email_body": email_body,
-                    'email_subject': 'Verify your email',
-                    "to_email": user_email
-                    }
-            # sending the mail to the user
-            Email.send_mail(data)
-            return Response({
-                "user": user_obj,
-                "token": token,
-                "message": "Account created successfully"
-            }, status.HTTP_201_CREATED,)
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save()
+#             # get the user email
+#             user_email = serializer.data["user"]["email"]
+#             # use the email to get the user object from CustomUser model in the database
+#             get_current_user_email = CustomUser.objects.get(email=user_email)
+#             user_obj = serializer.data["user"]
+#             # Send a signal to change the user is_active to false
+#             deactivate_user_status.send(sender=CustomUser, user=user_obj)
+#             # generate a token for the user
+#             token = AuthToken.objects.create(get_current_user_email)[1]
+#             # get the current site and domain name
+#             current_site = get_current_site(request).domain
+#             # Here we are calling the endpoint to email-verify and passing in the user id and token dynamically
+#             relative_link = reverse(
+#                 "account:email-verify", args=[user_obj["id"], token])
+#             # Here we pass in the current_site and the relative_link with it's added arguments
+#             absolute_url = f"http://{current_site}{relative_link}"
+#             email_body = f'Hi {user_obj["last_name"]} {user_obj["first_name"]}, please use the link below to verify your email \n {absolute_url}'
+#             data = {"email_body": email_body,
+#                     'email_subject': 'Verify your email',
+#                     "to_email": user_email
+#                     }
+#             # sending the mail to the user
+#             Email.send_mail(data)
+#             return Response({
+#                 "user": user_obj,
+#                 "token": token,
+#                 "message": "Account created successfully"
+#             }, status.HTTP_201_CREATED,)
 
 
 def VerifyEmail(request, id, token):

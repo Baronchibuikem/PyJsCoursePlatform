@@ -1,0 +1,45 @@
+
+  version: "3.7"
+
+  services:
+    web:
+      build: .
+      container_name: pyjs_web
+      ports: 
+        - "8000:8000"
+      volumes: 
+        - .:/pyjs
+      command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000" 
+      environment: 
+        - DEBUG=1
+      depends_on:
+        - pgdb
+        # - redis
+      links: 
+        - pgdb:pgdb
+        # - redis:redis
+    pgdb:
+      image: postgres
+      container_name: postgresdb
+      environment:
+        - POSTGRES_USER=pgadmin
+        - POSTGRES_PASSWORD=pyjs12345
+        - POSTGRES_DB=pgdb
+      ports: 
+        - "5432:5432"
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+    # celery:
+    #   build: .
+    #   command: celery -A PyJs worker -l INFO
+    #   volumes:
+    #     - .:/pyjs
+    #   depends_on:
+    #     - pgdb
+    #     - redis
+    # redis:
+    #   image: "redis:alpine"
+    #   container_name: redis_pyjs
+    #   restart: always
+  volumes:
+    pgdata:
